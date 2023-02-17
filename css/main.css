@@ -1,0 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&display=swap");
+
+/* RESETS */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* UTILITY */
+
+.disable-event {
+  pointer-events: none;
+}
+
+.enable-event {
+  pointer-events: auto;
+}
+
+.offscreen {
+  position: absolute;
+  left: -10000px;
+}
+
+/* GENERAL STYLES */
+
+html {
+  font-size: 22px;
+  font-family: "Concert One", cursive;
+}
+
+body {
+  background-color: #11161f;
+  color: white;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  /* width: 800px; */
+  width: clamp(350px, 100vw, 800px);
+  min-height: 667px;
+}
+
+.top-section {
+  border: 2px solid white;
+  border-bottom: none;
+  background-color: white;
+  color: #11161f;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.bottom-section {
+  border: 2px solid white;
+  border-top: none;
+  height: 50px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.score {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p1-score {
+  border-right: 1px solid white;
+}
+
+.cp-score {
+  border-left: 1px solid white;
+}
+
+.announcer {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.choice {
+  font-size: 4.7rem;
+  background-color: transparent;
+  border: none;
+  width: 33%;
+  height: 135px;
+}
+
+.p1-choice {
+  cursor: pointer;
+}
+
+.cp-choice {
+  cursor: default;
+}
+
+.p1-choices {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cp-choices {
+  display: flex;
+  justify-content: space-between;
+}
+
+.play-again {
+  z-index: 1;
+  opacity: 0.8;
+  background-color: white;
+  color: #11161f;
+  width: 70%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-size: 2rem;
+  margin: -90px auto 0 auto;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.2);
+}
+.score:focus {
+  background-color: white;
+  color: #11161f;
+}
+
+/* PLAYER ONE ANIMATIONS */
+
+.offscreen-right {
+  animation-name: offscreenRight;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.offscreen-left {
+  animation-name: offscreenLeft;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.choice-right-center {
+  animation-name: choiceRightCenter;
+  animation-duration: 0.9s;
+  animation-fill-mode: forwards;
+}
+
+.choice-left-center {
+  animation-name: choiceLeftCenter;
+  animation-duration: 0.9s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes offscreenRight {
+  to {
+    transform: translateX(400px) scale(0);
+  }
+}
+
+@keyframes offscreenLeft {
+  to {
+    transform: translateX(-400px) scale(0);
+  }
+}
+
+@keyframes choiceRightCenter {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes choiceLeftCenter {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* COMPUTER ANIMATION */
+
+.grow-fade-in {
+  animation-name: growFadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes growFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 769px) {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .scoreboard {
+    width: 49.5%;
+  }
+
+  .choice {
+    font-size: 7rem;
+    height: 220px;
+  }
+
+  .announcer {
+    font-size: 2rem;
+  }
+
+  .play-again {
+    margin: 25px auto 0 auto;
+  }
+}

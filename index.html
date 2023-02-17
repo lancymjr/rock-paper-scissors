@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/main.js" type="module"></script>
+  </head>
+  <body>
+    <main>
+      <h1 tabindex="0">Rock Paper Scissors</h1>
+      <a class="offscreen" href="#p1-announcer">Skip Scoreboard</a>
+
+      <section class="container">
+        <h2 class="offscreen">Scoreboard</h2>
+        <section class="scoreboard">
+          <h3 class="offscreen">All Time Scoreboard</h3>
+          <div class="top-section" aria-hidden="true">
+            <p><abbr title="Player One">P1</abbr></p>
+            <p>All Time</p>
+            <p><abbr title="Computer Player">CP</abbr></p>
+          </div>
+          <div class="bottom-section">
+            <div
+              class="score p1-score"
+              id="p1-local-score"
+              aria-label="Player One All Time Wins"
+              tabindex="0"
+            >
+              0
+            </div>
+            <div
+              class="score cp-score"
+              id="cp-local-score"
+              aria-label="Computer Player All Time Wins"
+              tabindex="0"
+            >
+              0
+            </div>
+          </div>
+        </section>
+
+        <section class="scoreboard">
+          <h3 class="offscreen">Session Scoreboard</h3>
+          <div class="top-section" aria-hidden="true">
+            <p><abbr title="Player One">P1</abbr></p>
+            <p>Session</p>
+            <p><abbr title="Computer Player">CP</abbr></p>
+          </div>
+          <div class="bottom-section">
+            <div
+              class="score p1-score"
+              id="p1-session-score"
+              aria-label="Player One Session Wins"
+              tabindex="0"
+            >
+              0
+            </div>
+            <div
+              class="score cp-score"
+              id="cp-session-score"
+              aria-label="Computer Player Session Wins"
+              tabindex="0"
+            >
+              0
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <h2
+          id="p1-announcer"
+          class="announcer"
+          aria-label="Player One Chooses"
+          tabindex="0"
+        >
+          Player One Chooses...
+        </h2>
+        <div class="p1-choices">
+          <button
+            class="choice p1-choice"
+            id="p1-rock"
+            tabindex="0"
+            aria-label="Select Rock"
+          >
+            ✊
+          </button>
+          <button
+            class="choice p1-choice"
+            id="p1-paper"
+            tabindex="0"
+            aria-label="Select Paper"
+          >
+            ✋
+          </button>
+          <button
+            class="choice p1-choice"
+            id="p1-scissors"
+            tabindex="0"
+            aria-label="Select Scissors"
+          >
+            ✌️
+          </button>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="cp-announcer" class="announcer" aria-label="Player One Chooses">
+          Computer Chooses...
+        </h2>
+        <div class="cp-choices">
+          <div class="choice cp-choice" id="cp-rock">✊</div>
+          <div class="choice cp-choice" id="cp-paper">✋</div>
+          <div class="choice cp-choice" id="cp-scissors">✌️</div>
+        </div>
+      </section>
+      <form>
+        <button class="play-again" id="play-again">Play Again?</button>
+      </form>
+    </main>
+  </body>
+</html>
