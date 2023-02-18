@@ -19,6 +19,7 @@ let j = 0;
 let m = 0;
 let n = 0;
 
+// sets the all time score to 0 if this this your first time one the page or sets the all time score to what ever it was when you left if you are a returning player
 if (localStorage.getItem("p1LocalScore") === null) {
   m = 0;
   localStorage.setItem("p1LocalScore", JSON.stringify(m));
@@ -34,8 +35,10 @@ if (localStorage.getItem("cpLocalScore") === null) {
   document.querySelector("#cp-local-score").innerText = n;
 }
 
-// Main event listeners
+// updates the score for the screen reader at the start
+updateScreenReaderScore();
 
+// Main event listeners
 document.querySelector("#p1-rock").addEventListener("click", function (e) {
   playGame("rock");
 });
@@ -48,7 +51,7 @@ document.querySelector("#p1-scissors").addEventListener("click", function (e) {
   playGame("scissors");
 });
 
-// helper functions
+// HELPER FUNCTIONS
 
 function p1AnnouncerFunc(p1Choice) {
   if (p1Choice === "rock") {
@@ -60,19 +63,35 @@ function p1AnnouncerFunc(p1Choice) {
   }
 }
 
+// Animations when you click on your choice. All the timeouts were so I could hide the choices that weren't chosen so the screen reader wouldn't tab to them but after the animations had finished. I had to disable the event so after the player chose they couln't click it again until the game rest.
 function p1AnimationFunc(choice) {
   if (choice === "rock") {
     p1Rock.classList.add("choice-right-center", "disable-event");
     p1Paper.classList.add("offscreen-right");
     p1Scissors.classList.add("offscreen-right");
+
+    setTimeout(function () {
+      p1Paper.style.visibility = "hidden";
+      p1Scissors.style.visibility = "hidden";
+    }, 1000);
   } else if (choice === "paper") {
     p1Rock.classList.add("offscreen-left");
     p1Paper.classList.add("disable-event");
     p1Scissors.classList.add("offscreen-right");
+
+    setTimeout(function () {
+      p1Rock.style.visibility = "hidden";
+      p1Scissors.style.visibility = "hidden";
+    }, 1000);
   } else {
     p1Rock.classList.add("offscreen-left");
     p1Paper.classList.add("offscreen-left");
     p1Scissors.classList.add("choice-left-center", "disable-event");
+
+    setTimeout(function () {
+      p1Rock.style.visibility = "hidden";
+      p1Paper.style.visibility = "hidden";
+    }, 1000);
   }
 }
 
@@ -82,6 +101,7 @@ function cpChoice() {
   return myArray[randomNumber];
 }
 
+// replaces the Computer choices with a count down after each second after 4 seconds replaces the middle option with what the computer chose(rock, paper, or scissors) then displays the play again button
 function cpAnimationFunc(cChoice) {
   setTimeout(function () {
     cpRock.innerText = "1";
@@ -101,10 +121,16 @@ function cpAnimationFunc(cChoice) {
     cpScissors.innerText = "";
     if (cChoice === "rock") {
       cpPaper.innerText = "✊";
+      document.querySelector("#cp-announcer").ariaLabel =
+        "Computer chose rock.";
     } else if (cChoice === "paper") {
       cpPaper.innerText = "✋";
+      document.querySelector("#cp-announcer").ariaLabel =
+        "Computer chose paper.";
     } else {
       cpPaper.innerText = "✌️";
+      document.querySelector("#cp-announcer").ariaLabel =
+        "Computer chose scissors.";
     }
   }, 4000);
 
@@ -135,6 +161,7 @@ function decisionMaker(p1Choice, cpChoice) {
   return decision;
 }
 
+// updates the all time and session scores
 function sessionScore(decision, cpChoice) {
   const dec = decision;
   if (dec === "P1 wins") {
@@ -167,13 +194,29 @@ function enableEvents() {
   p1Scissors.classList.add("enable-event");
 }
 
+function updateScreenReaderScore() {
+  document.querySelector("#p1-local-score").ariaLabel =
+    "Player One has " + m + " All Time Wins";
+  document.querySelector("#cp-local-score").ariaLabel =
+    "Computer Player has " + n + " All Time Wins";
+  document.querySelector("#p1-session-score").ariaLabel =
+    "Player One has " + i + " Wins this session.";
+  document.querySelector("#cp-session-score").ariaLabel =
+    "Computer Player has " + j + " Wins this session.";
+}
+
+// resets the game
 function playAgain() {
-  document.querySelector("#play-again").addEventListener("click", function () {
+  document.querySelector("#play-again").addEventListener("click", function (e) {
     p1Announcer.innerText = "Player One Chooses...";
 
     p1Rock.classList.remove("offscreen-left", "choice-right-center");
     p1Paper.classList.remove("offscreen-left", "offscreen-right");
     p1Scissors.classList.remove("offscreen-right", "choice-left-center");
+
+    p1Rock.style.visibility = "visible";
+    p1Paper.style.visibility = "visible";
+    p1Scissors.style.visibility = "visible";
 
     cpAnnouncer.innerText = "Computer Chooses...";
 
@@ -181,8 +224,9 @@ function playAgain() {
     cpPaper.innerText = "✋";
     cpScissors.innerText = "✌️";
 
+    p1Announcer.focus();
     document.querySelector("#play-again").style.display = "none";
-
+    e.preventDefault();
     enableEvents();
   });
 }
@@ -194,6 +238,7 @@ function playGame(p1Choice) {
   cpAnimationFunc(cChoice);
   setTimeout(function () {
     sessionScore(decisionMaker(p1Choice, cChoice), cChoice);
+    updateScreenReaderScore();
   }, 4000);
   playAgain();
 }

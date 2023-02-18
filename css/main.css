@@ -45,6 +45,11 @@ main {
   /* width: 800px; */
   width: clamp(350px, 100vw, 800px);
   min-height: 667px;
+  position: absolute;
+}
+
+.title {
+  font-size: 1.9rem;
 }
 
 .top-section {
@@ -136,6 +141,14 @@ button:hover {
   color: #11161f;
 }
 
+.skip-scoreboard:focus {
+  background-color: white;
+  color: #11161f;
+  position: absolute;
+  left: 0px;
+  top: 32px;
+}
+
 /* PLAYER ONE ANIMATIONS */
 
 .offscreen-right {
@@ -224,7 +237,7 @@ button:hover {
   }
 
   .announcer {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .play-again {

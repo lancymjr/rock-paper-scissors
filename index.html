@@ -10,8 +10,10 @@
   </head>
   <body>
     <main>
-      <h1 tabindex="0">Rock Paper Scissors</h1>
-      <a class="offscreen" href="#p1-announcer">Skip Scoreboard</a>
+      <h1 class="title" tabindex="0">Rock Paper Scissors</h1>
+      <a class="skip-scoreboard offscreen" href="#p1-announcer"
+        >Skip Scoreboard</a
+      >
 
       <section class="container">
         <h2 class="offscreen">Scoreboard</h2>
@@ -23,22 +25,8 @@
             <p><abbr title="Computer Player">CP</abbr></p>
           </div>
           <div class="bottom-section">
-            <div
-              class="score p1-score"
-              id="p1-local-score"
-              aria-label="Player One All Time Wins"
-              tabindex="0"
-            >
-              0
-            </div>
-            <div
-              class="score cp-score"
-              id="cp-local-score"
-              aria-label="Computer Player All Time Wins"
-              tabindex="0"
-            >
-              0
-            </div>
+            <div class="score p1-score" id="p1-local-score" tabindex="0">0</div>
+            <div class="score cp-score" id="cp-local-score" tabindex="0">0</div>
           </div>
         </section>
 
@@ -50,20 +38,10 @@
             <p><abbr title="Computer Player">CP</abbr></p>
           </div>
           <div class="bottom-section">
-            <div
-              class="score p1-score"
-              id="p1-session-score"
-              aria-label="Player One Session Wins"
-              tabindex="0"
-            >
+            <div class="score p1-score" id="p1-session-score" tabindex="0">
               0
             </div>
-            <div
-              class="score cp-score"
-              id="cp-session-score"
-              aria-label="Computer Player Session Wins"
-              tabindex="0"
-            >
+            <div class="score cp-score" id="cp-session-score" tabindex="0">
               0
             </div>
           </div>
@@ -83,7 +61,6 @@
           <button
             class="choice p1-choice"
             id="p1-rock"
-            tabindex="0"
             aria-label="Select Rock"
           >
             ✊
@@ -91,7 +68,6 @@
           <button
             class="choice p1-choice"
             id="p1-paper"
-            tabindex="0"
             aria-label="Select Paper"
           >
             ✋
@@ -99,7 +75,6 @@
           <button
             class="choice p1-choice"
             id="p1-scissors"
-            tabindex="0"
             aria-label="Select Scissors"
           >
             ✌️
@@ -108,7 +83,7 @@
       </section>
 
       <section>
-        <h2 id="cp-announcer" class="announcer" aria-label="Player One Chooses">
+        <h2 id="cp-announcer" class="announcer" tabindex="0">
           Computer Chooses...
         </h2>
         <div class="cp-choices">
@@ -118,7 +93,13 @@
         </div>
       </section>
       <form>
-        <button class="play-again" id="play-again">Play Again?</button>
+        <button
+          class="play-again"
+          id="play-again"
+          aria-label="Click or press enter to play again."
+        >
+          Play Again?
+        </button>
       </form>
     </main>
   </body>
